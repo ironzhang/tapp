@@ -1,5 +1,5 @@
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200406151337-f072baf912ad h1:ijdUWjZN3zKoJ1VtpBs8IDZx9qO41V697u98GVK54AA=
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200406151337-f072baf912ad/go.mod h1:DzQ156tfv5IVzVQOR0WCGGDefMu1pfbFq6OkO7GlFCs=
+git.xiaojukeji.com/pearls/tlog v0.0.0-20200408073547-1b4a9301ff0a h1:7NIYHdgI+cRAszLjWf5KeCmoJiOFLM0t1hslxWEcQpQ=
+git.xiaojukeji.com/pearls/tlog v0.0.0-20200408073547-1b4a9301ff0a/go.mod h1:DzQ156tfv5IVzVQOR0WCGGDefMu1pfbFq6OkO7GlFCs=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

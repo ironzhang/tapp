@@ -70,10 +70,10 @@ type Framework struct {
 	// 日志上下文钩子，可以为 nil
 	LoggerContextHook zaplog.ContextHook
 
-	// 日志配置，如果为 nil，则使用 zaplog.NewProductionConfig
+	// 日志配置，如果为 nil，则使用 DefaultLogConfig
 	LogConfig *zaplog.Config
 
-	// 配置编解码器，如果为 nil，则使用 tapp.JSONC
+	// 配置编解码器，如果为 nil，则使用 tapp.TOMLC
 	Codec Codec
 
 	// 命令行解析器，如果为 nil，则使用 flag.CommandLine
@@ -85,11 +85,10 @@ func (p *Framework) init() error {
 		return errors.New("Framework.Application is nil")
 	}
 	if p.LogConfig == nil {
-		cfg := zaplog.NewProductionConfig()
-		p.LogConfig = &cfg
+		p.LogConfig = &DefaultLogConfig
 	}
 	if p.Codec == nil {
-		p.Codec = JSONC
+		p.Codec = TOMLC
 	}
 	if p.CommandLine == nil {
 		p.CommandLine = flag.CommandLine
