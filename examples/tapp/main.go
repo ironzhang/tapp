@@ -1,10 +1,3 @@
-# tapp
-
-team application
-
-## Example
-
-```
 package main
 
 import (
@@ -79,4 +72,3 @@ func main() {
 	}
 	f.Main(os.Args)
 }
-```
