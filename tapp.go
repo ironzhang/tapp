@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"runtime"
 	"sync"
+	"syscall"
 	"time"
 
 	"git.xiaojukeji.com/pearls/tlog"
@@ -230,9 +231,14 @@ func (p *Framework) run() (err error) {
 	quit := make(chan error, 1)
 	ctx, cancel := context.WithCancel(context.Background())
 	go func() {
+		// 由于无法捕捉 SIGKILL 信号，因此正常结束进程使用
+		// kill pid
+		// 轻易不要使用
+		// kill -9 pid
 		ch := make(chan os.Signal, 1)
-		signal.Notify(ch, os.Interrupt, os.Kill)
-		<-ch
+		signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+		sig := <-ch
+		tlog.Infow("recv signal", "sig", sig)
 		cancel()
 		time.Sleep(10 * time.Second)
 		quit <- errors.New("wait 10s, force exit")

@@ -60,6 +60,7 @@ func main() {
 			HTTPAddr:   ":8000",
 		},
 	}
+	tapp.DefaultLogConfig.Level = tlog.DEBUG
 	f := tapp.Framework{
 		Version: &tapp.VersionInfo{
 			Version:   Version,
