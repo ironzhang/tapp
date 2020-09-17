@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"flag"
+	"fmt"
 	"os"
 
 	"git.xiaojukeji.com/pearls/tapp"
@@ -14,8 +16,25 @@ type Config struct {
 	HTTPAddr   string
 }
 
+type Options struct {
+	OnlyVersion bool
+}
+
 type Application struct {
-	config Config
+	config  Config
+	options Options
+}
+
+func (p *Application) SetFlags(fs *flag.FlagSet) {
+	fs.BoolVar(&p.options.OnlyVersion, "only-version", false, "only print version")
+}
+
+func (p *Application) DoCommand() (exit bool) {
+	if p.options.OnlyVersion {
+		fmt.Printf("%s\n", Version)
+		return true
+	}
+	return false
 }
 
 func (p *Application) Init() error {

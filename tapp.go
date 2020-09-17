@@ -26,6 +26,13 @@ type Flagger interface {
 	SetFlags(fs *flag.FlagSet)
 }
 
+// Command 命令执行接口
+//
+// Application 如果实现了该接口，可执行自定义命令
+type Command interface {
+	DoCommand() (quit bool)
+}
+
 // Application 应用接口
 type Application interface {
 	Init() error
@@ -100,7 +107,7 @@ func (p *Framework) init() error {
 func (p *Framework) setupCommandLine() {
 	// 版本命令行参数
 	if p.Version != nil {
-		p.CommandLine.BoolVar(&p.Options.Version, "version", p.Options.Version, "")
+		p.CommandLine.BoolVar(&p.Options.Version, "version", p.Options.Version, "print version info")
 	}
 
 	// 应用配置命令行参数
@@ -181,6 +188,11 @@ func (p *Framework) doCommand() (err error) {
 			return fmt.Errorf("generate log config: %w", err)
 		}
 		quit = true
+	}
+	if c, ok := p.Application.(Command); ok {
+		if c.DoCommand() {
+			quit = true
+		}
 	}
 	if quit {
 		exit(0)
