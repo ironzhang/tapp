@@ -14,7 +14,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.DEBUG,
 			MaxLevel: iface.DEBUG,
-			URLs:     []string{"rfile://$workdir/log/debug.log?suffix=hour&period=1h"},
+			URLs:     []string{"rfile://$workdir/log/debug.log?cut=hour"},
 		},
 		{
 			Name:     "Info",
@@ -22,7 +22,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.INFO,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/info.log?suffix=hour&period=1h"},
+			URLs:     []string{"rfile://$workdir/log/info.log?cut=hour"},
 		},
 		{
 			Name:     "Warn",
@@ -30,7 +30,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.WARN,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/warn.log?suffix=hour&period=1h"},
+			URLs:     []string{"rfile://$workdir/log/warn.log?cut=hour"},
 		},
 		{
 			Name:     "Error",
@@ -38,7 +38,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.ERROR,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/error.log?suffix=hour&period=1h"},
+			URLs:     []string{"rfile://$workdir/log/error.log?cut=hour"},
 		},
 		{
 			Name:     "Fatal",
@@ -46,7 +46,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.PANIC,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/fatal.log?suffix=hour&period=1h"},
+			URLs:     []string{"rfile://$workdir/log/fatal.log?cut=hour"},
 		},
 		{
 			Name:     "Access",
@@ -54,7 +54,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.DEBUG,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/access.log?suffix=hour&period=1h"},
+			URLs:     []string{"rfile://$workdir/log/access.log?cut=hour"},
 		},
 	},
 	Loggers: []zaplog.LoggerConfig{
