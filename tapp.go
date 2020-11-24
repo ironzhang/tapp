@@ -240,7 +240,7 @@ func (p *Framework) run() (err error) {
 	tlog.Debug("init app successful")
 
 	// quit signal
-	quit := make(chan error, 1)
+	quit := make(chan error, len(p.Runners))
 	ctx, cancel := context.WithCancel(context.Background())
 	go func() {
 		// 由于无法捕捉 SIGKILL 信号，因此正常结束进程使用
@@ -262,6 +262,7 @@ func (p *Framework) run() (err error) {
 		wg.Add(1)
 		go func(n int, f RunFunc) {
 			if err := f(ctx); err != nil {
+				tlog.Errorf("run %dth runner(%v): %v", n, f, err)
 				quit <- fmt.Errorf("run %dth runner(%v): %w", n, f, err)
 			}
 			wg.Done()
@@ -323,11 +324,17 @@ func (p *Framework) Main(args []string) {
 	defer logger.Close()
 	tlog.SetLogger(logger)
 
+	// 退出前关闭日志
+	shutdown := func(code int) {
+		logger.Close()
+		exit(code)
+	}
+
 	// 加载应用配置
 	err = p.loadAppConfig()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "load app config: %v\n", err)
-		exit(5)
+		shutdown(5)
 	}
 
 	// 往日志中输出程序启动信息
@@ -336,6 +343,6 @@ func (p *Framework) Main(args []string) {
 	// 运行程序
 	if err = p.run(); err != nil {
 		fmt.Fprintf(os.Stderr, "run: %v", err)
-		exit(6)
+		shutdown(6)
 	}
 }

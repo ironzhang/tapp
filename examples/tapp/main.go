@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -52,7 +53,7 @@ func (p *Application) RunGRPCServer(ctx context.Context) error {
 		break
 	}
 	tlog.Infow("stop grpc server", "addr", p.config.GRPCAddr)
-	return nil
+	return errors.New("failed to stop grpc server")
 }
 
 func (p *Application) RunHTTPServer(ctx context.Context) error {
@@ -62,7 +63,7 @@ func (p *Application) RunHTTPServer(ctx context.Context) error {
 		break
 	}
 	tlog.Infow("stop http server", "addr", p.config.HTTPAddr)
-	return nil
+	return errors.New("failed to stop http server")
 }
 
 var (
