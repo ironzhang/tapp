@@ -228,7 +228,7 @@ func (p *Framework) printStartInfo() {
 		args = append(args, "config", p.Config)
 	}
 	tlog.Infow("start", args...)
-	fmt.Fprintf(os.Stdout, "%v start, version=%v, config=%v\n", now(), p.Version, p.Config)
+	fmt.Fprintf(os.Stdout, "[%v] start, version=%v, config=%v\n", now(), p.Version, p.Config)
 }
 
 func (p *Framework) run() (err error) {
@@ -288,7 +288,6 @@ func (p *Framework) run() (err error) {
 		return fmt.Errorf("fini app: %w", err)
 	}
 	tlog.Debug("fini app successful")
-	time.Sleep(100 * time.Millisecond) // 有些 fini 中调用的 Close 等函数可能是异步的，所以等待 100ms
 
 	// return error
 	return qerr
@@ -299,41 +298,42 @@ func (p *Framework) Main(args []string) {
 
 	// 初始化框架
 	if err = p.init(); err != nil {
-		fmt.Fprintf(os.Stderr, "init: %v\n", err)
+		fmt.Fprintf(os.Stderr, "[%v] init: %v\n", now(), err)
 		exit(1)
 	}
 
 	// 解析命令行参数
 	if err = p.parseCommandLine(args); err != nil {
-		fmt.Fprintf(os.Stderr, "parse command line: %v\n", err)
+		fmt.Fprintf(os.Stderr, "[%v] parse command line: %v\n", now(), err)
 		exit(2)
 	}
 
 	// 执行命令
 	if err = p.doCommand(); err != nil {
-		fmt.Fprintf(os.Stderr, "do command: %v\n", err)
+		fmt.Fprintf(os.Stderr, "[%v] do command: %v\n", now(), err)
 		exit(3)
 	}
 
 	// 加载日志对象
 	logger, err := p.openLogger()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "open logger: %v\n", err)
+		fmt.Fprintf(os.Stderr, "[%v] open logger: %v\n", now(), err)
 		exit(4)
 	}
 	defer logger.Close()
 	tlog.SetLogger(logger)
 
-	// 退出前关闭日志
+	// 关闭程序
 	shutdown := func(code int) {
-		logger.Close()
+		logger.Close()                     // 关闭日志
+		time.Sleep(200 * time.Millisecond) // 有些模块如监控上报是异步处理的，所以等待 200ms 再退出
 		exit(code)
 	}
 
 	// 加载应用配置
 	err = p.loadAppConfig()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "load app config: %v\n", err)
+		fmt.Fprintf(os.Stderr, "[%v] load app config: %v\n", now(), err)
 		shutdown(5)
 	}
 
@@ -342,7 +342,10 @@ func (p *Framework) Main(args []string) {
 
 	// 运行程序
 	if err = p.run(); err != nil {
-		fmt.Fprintf(os.Stderr, "run: %v", err)
+		fmt.Fprintf(os.Stderr, "[%v] run: %v", now(), err)
 		shutdown(6)
 	}
+
+	// 正常退出
+	shutdown(0)
 }
