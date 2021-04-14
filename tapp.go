@@ -228,7 +228,7 @@ func (p *Framework) printStartInfo() {
 		args = append(args, "config", p.Config)
 	}
 	tlog.Infow("start", args...)
-	fmt.Fprintf(os.Stdout, "[%v] start, version=%v, config=%v\n", now(), p.Version, p.Config)
+	fmt.Fprintf(os.Stdout, "[%v] start, version=%v, config=%+v\n", now(), p.Version, p.Config)
 }
 
 func (p *Framework) run() (err error) {
@@ -342,7 +342,7 @@ func (p *Framework) Main(args []string) {
 
 	// 运行程序
 	if err = p.run(); err != nil {
-		fmt.Fprintf(os.Stderr, "[%v] run: %v", now(), err)
+		fmt.Fprintf(os.Stderr, "[%v] run: %v\n", now(), err)
 		shutdown(6)
 	}
 
