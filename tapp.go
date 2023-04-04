@@ -33,11 +33,11 @@ type Command interface {
 	DoCommand() (quit bool)
 }
 
-// SigKillHook 程序关闭接口
+// OnSignal 程序接受信号接口
 //
-// Application 如果实现了该接口，可以自定义程序关闭动作
-type SigKillHook interface {
-	DoHook()
+// Application 如果实现了该接口，可以自定义程序接受信号动作
+type OnSignal interface {
+	OnSignal(sig os.Signal)
 }
 
 // Application 应用接口
@@ -259,9 +259,9 @@ func (p *Framework) run() (err error) {
 		sig := <-ch
 		tlog.Infow("recv signal", "sig", sig)
 
-		s, ok := p.Application.(SigKillHook)
+		s, ok := p.Application.(OnSignal)
 		if ok {
-			s.DoHook()
+			s.OnSignal(sig)
 		}
 
 		cancel()
