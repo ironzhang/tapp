@@ -33,6 +33,13 @@ type Command interface {
 	DoCommand() (quit bool)
 }
 
+// SigKillHook 程序关闭接口
+//
+// Application 如果实现了该接口，可以自定义程序关闭动作
+type SigKillHook interface {
+	DoHook()
+}
+
 // Application 应用接口
 type Application interface {
 	Init() error
@@ -251,6 +258,12 @@ func (p *Framework) run() (err error) {
 		signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
 		sig := <-ch
 		tlog.Infow("recv signal", "sig", sig)
+
+		s, ok := p.Application.(SigKillHook)
+		if ok {
+			s.DoHook()
+		}
+
 		cancel()
 		time.Sleep(10 * time.Second)
 		quit <- errors.New("wait 10s, force exit")
