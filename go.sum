@@ -1,9 +1,3 @@
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200408073547-1b4a9301ff0a h1:7NIYHdgI+cRAszLjWf5KeCmoJiOFLM0t1hslxWEcQpQ=
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200408073547-1b4a9301ff0a/go.mod h1:DzQ156tfv5IVzVQOR0WCGGDefMu1pfbFq6OkO7GlFCs=
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200918105432-e3eea11eb920 h1:i94+lAnnIcGhjzFdAQ2JgHjtxhGvEunaXyWeqcCsIMo=
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200918105432-e3eea11eb920/go.mod h1:DzQ156tfv5IVzVQOR0WCGGDefMu1pfbFq6OkO7GlFCs=
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200918114009-1057eb910e63 h1:c7UDN9j/shrEVgEITWWaxuoZG27IZDchsM7hbK7z9SU=
-git.xiaojukeji.com/pearls/tlog v0.0.0-20200918114009-1057eb910e63/go.mod h1:DzQ156tfv5IVzVQOR0WCGGDefMu1pfbFq6OkO7GlFCs=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -11,6 +5,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/renameio v0.1.0 h1:GOZbcHa3HfsPKPlmyPyN2KEohoMXOhdMbHrvbpl2QaA=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
+github.com/ironzhang/tlog v0.0.0-20230221102626-339a8b110d69 h1:1bWtGDWYIBcDuA5eCTTc2wzNZXJ3go8OiA4W72Ob7M0=
+github.com/ironzhang/tlog v0.0.0-20230221102626-339a8b110d69/go.mod h1:kZqotoXReb+4UFQzMihhaIpu0hBCS3kTIzI8DXX7MHQ=
 github.com/kisielk/gotool v1.0.0 h1:AV2c/EiW3KqPNT9ZKl07ehoAGi4C5/01Cfbblndcapg=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/kr/pretty v0.1.0 h1:L/CwN0zerZDmRFUapSPitk6f+Q3+0za1rQkzVuMiMFI=

@@ -12,8 +12,8 @@ import (
 	"syscall"
 	"time"
 
-	"git.xiaojukeji.com/pearls/tlog"
-	"git.xiaojukeji.com/pearls/tlog/zaplog"
+	"github.com/ironzhang/tlog"
+	"github.com/ironzhang/tlog/zaplog"
 )
 
 var exit = os.Exit

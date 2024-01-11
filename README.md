@@ -11,8 +11,8 @@ import (
 	"context"
 	"os"
 
-	"git.xiaojukeji.com/pearls/tapp"
-	"git.xiaojukeji.com/pearls/tlog"
+	"github.com/ironzhang/tapp"
+	"github.com/ironzhang/tlog"
 )
 
 type Config struct {

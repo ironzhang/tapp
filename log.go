@@ -1,8 +1,8 @@
 package tapp
 
 import (
-	"git.xiaojukeji.com/pearls/tlog/iface"
-	"git.xiaojukeji.com/pearls/tlog/zaplog"
+	"github.com/ironzhang/tlog/iface"
+	"github.com/ironzhang/tlog/zaplog"
 )
 
 var DefaultLogConfig = zaplog.Config{
@@ -14,7 +14,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.DEBUG,
 			MaxLevel: iface.DEBUG,
-			URLs:     []string{"rfile://$workdir/log/debug.log?cut=hour"},
+			URLs:     []string{"rfile://$workdir/log/debug.log?cut=day"},
 		},
 		{
 			Name:     "Info",
@@ -22,7 +22,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.INFO,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/info.log?cut=hour"},
+			URLs:     []string{"rfile://$workdir/log/info.log?cut=day"},
 		},
 		{
 			Name:     "Warn",
@@ -30,7 +30,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.WARN,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/warn.log?cut=hour"},
+			URLs:     []string{"rfile://$workdir/log/warn.log?cut=day"},
 		},
 		{
 			Name:     "Error",
@@ -38,7 +38,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.ERROR,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/error.log?cut=hour"},
+			URLs:     []string{"rfile://$workdir/log/error.log?cut=day"},
 		},
 		{
 			Name:     "Fatal",
@@ -46,15 +46,7 @@ var DefaultLogConfig = zaplog.Config{
 			Encoder:  zaplog.NewConsoleEncoderConfig(),
 			MinLevel: iface.PANIC,
 			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/fatal.log?cut=hour"},
-		},
-		{
-			Name:     "Access",
-			Encoding: "",
-			Encoder:  zaplog.NewConsoleEncoderConfig(),
-			MinLevel: iface.DEBUG,
-			MaxLevel: iface.FATAL,
-			URLs:     []string{"rfile://$workdir/log/access.log?cut=hour"},
+			URLs:     []string{"rfile://$workdir/log/fatal.log?cut=day"},
 		},
 	},
 	Loggers: []zaplog.LoggerConfig{
@@ -63,12 +55,6 @@ var DefaultLogConfig = zaplog.Config{
 			DisableCaller:   false,
 			StacktraceLevel: zaplog.PanicStacktrace,
 			Cores:           []string{"Debug", "Info", "Warn", "Error", "Fatal"},
-		},
-		{
-			Name:            "access",
-			DisableCaller:   false,
-			StacktraceLevel: zaplog.PanicStacktrace,
-			Cores:           []string{"Access"},
 		},
 	},
 }

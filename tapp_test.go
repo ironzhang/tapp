@@ -5,8 +5,7 @@ import (
 	"os"
 	"time"
 
-	"git.xiaojukeji.com/pearls/tlog"
-	"git.xiaojukeji.com/pearls/tlog/zaplog"
+	"github.com/ironzhang/tlog"
 )
 
 type TConfig struct {
@@ -55,6 +54,8 @@ func Example_tapp() {
 	now = func() time.Time {
 		return time.Time{}
 	}
+	exit = func(code int) {
+	}
 
 	app := &TApplication{
 		config: TConfig{
@@ -63,7 +64,6 @@ func Example_tapp() {
 			HTTPAddr:   ":8000",
 		},
 	}
-	logcfg := zaplog.NewDevelopmentConfig()
 	f := Framework{
 		Version: &VersionInfo{
 			Version:   "0.0.1",
@@ -73,10 +73,9 @@ func Example_tapp() {
 		Application: app,
 		Config:      app.config,
 		Runners:     []RunFunc{app.RunGRPCServer, app.RunHTTPServer},
-		LogConfig:   &logcfg,
 	}
 	f.Main(os.Args)
 
 	// output:
-	// 0001-01-01 00:00:00 +0000 UTC start, version=&{0.0.1 git commit build time}, config={development :7000 :8000}
+	// [0001-01-01 00:00:00 +0000 UTC] start, version=&{0.0.1 git commit build time}, config={Enviroment:development GRPCAddr::7000 HTTPAddr::8000}
 }
